@@ -20,12 +20,12 @@ function CommentBox ({ comment: { _id, text, author, date, image, likes }}) {
       <p>{text}</p>
       <p>Likes: {likes}</p>
       <img src={image}></img>
-      {/* {currentUser?._id == author?._id && (
-        <> */}
+      {currentUser?._id == '66182fc8f225c9be4094ee26' && (
+        <>
           <EditCommentModal commentId={_id}/>
           <button onClick={handleDelete}>Delete</button>
-        {/* </>
-      )} */}
+        </>
+      )}
     </div>
   );
 }
