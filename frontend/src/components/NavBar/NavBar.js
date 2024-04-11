@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './NavBar.css';
-import { logout } from '../../store/session';
+import { login, logout } from '../../store/session';
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
@@ -10,6 +10,11 @@ function NavBar () {
   const logoutUser = e => {
       e.preventDefault();
       dispatch(logout());
+  }
+
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    dispatch(login({ email: "admin@aa.io", password: "password" })); 
   }
 
   const getLinks = () => {
@@ -27,6 +32,7 @@ function NavBar () {
         <div className="links-auth">
           <Link to={'/signup'}>Signup</Link>
           <Link to={'/login'}>Login</Link>
+          <button onClick={handleAdminLogin}>Admin Login</button>
         </div>
       );
     }
