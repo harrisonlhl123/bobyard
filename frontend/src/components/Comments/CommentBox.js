@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteComment } from "../../store/comments";
 
 function CommentBox ({ comment: { _id, text, author }}) {
-  // username
-  const { username } = author;
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
 
@@ -17,7 +15,7 @@ function CommentBox ({ comment: { _id, text, author }}) {
 
   return (
     <div className="tweet">
-      <h3>{username}</h3>
+      <h3>{author}</h3>
       <p>{text}</p>
       {currentUser._id == author._id && (
         <>

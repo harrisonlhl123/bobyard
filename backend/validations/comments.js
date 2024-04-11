@@ -7,7 +7,7 @@ const validateCommentInput = [
     .withMessage("Author can't be blank"),
   check('text')
     .exists({ checkFalsy: true })
-    .withMessage("Tweet can't be blank"),
+    .withMessage("Text can't be blank"),
   // check('date')
   //   .exists({ checkFalsy: true })
   //   .withMessage("Date can't be blank"),
