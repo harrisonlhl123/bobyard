@@ -7,9 +7,11 @@ import './CommentCompose.css';
 function CommentCompose () {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
-  const author = useSelector(state => state.session.user);
+  const author_id = useSelector(state => state.session.user);
+  const author = author_id.username;
   const newComment = useSelector(state => state.comments.new);
   const errors = useSelector(state => state.errors.comments);
+  // debugger
 
   useEffect(() => {
     return () => dispatch(clearCommentErrors());
@@ -17,7 +19,7 @@ function CommentCompose () {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(composeComment({ text })); 
+    dispatch(composeComment({ text, author })); 
     setText('');
   };
 
@@ -36,14 +38,14 @@ function CommentCompose () {
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" />
       </form>
-      <div className="tweet-preview">
+      {/* <div className="tweet-preview">
         <h3>Comment Preview</h3>
         {text ? <CommentBox comment={{text, author}} /> : undefined}
       </div>
       <div className="previous-tweet">
         <h3>Previous Comment</h3>
         {newComment ? <CommentBox comment={newComment} /> : undefined}
-      </div>
+      </div> */}
     </>
   )
 }

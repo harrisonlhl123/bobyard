@@ -45,7 +45,7 @@ router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
     try {
       const newComment = new Comment({
         text: req.body.text,
-        author: req.user._id
+        author: req.body.author
       });
   
       let comment = await newComment.save();

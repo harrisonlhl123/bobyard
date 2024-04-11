@@ -17,7 +17,7 @@ function CommentBox ({ comment: { _id, text, author }}) {
     <div className="tweet">
       <h3>{author}</h3>
       <p>{text}</p>
-      {currentUser._id == author._id && (
+      {currentUser?._id == author?._id && (
         <>
           <EditCommentModal commentId={_id}/>
           <button onClick={handleDelete}>Delete</button>
