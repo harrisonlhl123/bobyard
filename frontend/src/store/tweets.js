@@ -1,67 +1,66 @@
 import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
-const RECEIVE_TWEETS = "tweets/RECEIVE_TWEETS";
-const RECEIVE_USER_TWEETS = "tweets/RECEIVE_USER_TWEETS";
-const RECEIVE_TWEET = "tweets/RECEIVE_TWEET"
-const RECEIVE_TWEET_ERRORS = "tweets/RECEIVE_TWEET_ERRORS";
-const CLEAR_TWEET_ERRORS = "tweets/CLEAR_TWEET_ERRORS";
-const UPDATE_TWEET = "tweets/UPDATE_TWEET";
-const REMOVE_TWEET = "tweets/REMOVE_TWEET";
+const RECEIVE_COMMENTS = "comments/RECEIVE_COMMENTS";
+const RECEIVE_USER_COMMENTS = "comments/RECEIVE_USER_COMMENTS";
+const RECEIVE_COMMENT = "comments/RECEIVE_COMMENT"
+const RECEIVE_COMMENT_ERRORS = "comments/RECEIVE_COMMENT_ERRORS";
+const CLEAR_COMMENT_ERRORS = "comments/CLEAR_COMMENT_ERRORS";
+const UPDATE_COMMENT = "comments/UPDATE_COMMENT";
+const REMOVE_COMMENT = "comments/REMOVE_COMMENT";
 
-const receiveTweets = tweets => ({
-  type: RECEIVE_TWEETS,
-  tweets
+const receiveComments = comments => ({
+  type: RECEIVE_COMMENTS,
+  comments
 });
 
-const receiveUserTweets = tweets => ({
-  type: RECEIVE_USER_TWEETS,
-  tweets
+const receiveUserComments = comments => ({
+  type: RECEIVE_USER_COMMENTS,
+  comments
 });
 
-const receiveTweet = tweet => ({
-  type: RECEIVE_TWEET,
-  tweet
+const receiveComment = comment => ({
+  type: RECEIVE_COMMENT,
+  comment
 })
 
 const receiveErrors = errors => ({
-  type: RECEIVE_TWEET_ERRORS,
+  type: RECEIVE_COMMENT_ERRORS,
   errors
 });
 
-const updateTweet = tweet => ({
-  type: UPDATE_TWEET,
-  tweet
+const updateComment = comment => ({
+  type: UPDATE_COMMENT,
+  comment
 })
 
-const removeTweet = tweetId => ({
-  type: REMOVE_TWEET,
-  tweetId
+const removeComment = commentId => ({
+  type: REMOVE_COMMENT,
+  commentId
 })
 
-export const clearTweetErrors = errors => ({
-    type: CLEAR_TWEET_ERRORS,
+export const clearCommentErrors = errors => ({
+    type: CLEAR_COMMENT_ERRORS,
     errors
 });
 
-// export const getTweet = tweetId => state => state.tweets ? state.tweets._id == tweetId : null;
-export const getTweet = tweetId => state => {
-  // Assuming tweetId is a string
-  const tweetArray = Object.values(state.tweets) || [];
-  const tweet = tweetArray.find(t => t._id === tweetId);
-  return tweet || null;
+export const getComment = commentId => state => {
+  // Assuming commentId is a string
+  const commentArray = Object.values(state.comments) || [];
+  const comment = commentArray.find(c => c._id === commentId);
+  return comment || null;
 };
 
-export const getTweets = state => state.tweets ? state.tweets : [];
+export const getComments = state => state.comments ? state.comments : [];
 
-export const getUserTweets = userId => state => Object.values(state.tweets)
-    .filter(tweet => tweet.author._id == userId)
+export const getUserComments = userId => state => Object.values(state.comments)
+    .filter(comment => comment.author._id == userId)
 
-export const fetchTweets = () => async dispatch => {
+export const fetchComments = () => async dispatch => {
     try {
-      const res = await jwtFetch ('/api/tweets');
-      const tweets = await res.json();
-      dispatch(receiveTweets(tweets));
+      const res = await jwtFetch ('/api/comments');
+      const comments = await res.json();
+      dispatch(receiveComments(comments));
     } catch (err) {
       const resBody = await err.json();
       if (resBody.statusCode === 400) {
@@ -70,20 +69,20 @@ export const fetchTweets = () => async dispatch => {
     }
   };
 
-  export const fetchTweet = tweetId => async dispatch => {
-    const res = await jwtFetch(`api/tweets/${tweetId}`);
+  export const fetchComment = commentId => async dispatch => {
+    const res = await jwtFetch(`api/comments/${commentId}`);
 
     if (res.ok) {
-      const tweet = await res.json();
-      dispatch(receiveTweet(tweet));
+      const comment = await res.json();
+      dispatch(receiveComment(comment));
     }
   }
   
-  export const fetchUserTweets = id => async dispatch => {
+  export const fetchUserComments = id => async dispatch => {
     try {
-      const res = await jwtFetch(`/api/tweets/user/${id}`);
-      const tweets = await res.json();
-      dispatch(receiveUserTweets(tweets));
+      const res = await jwtFetch(`/api/comments/user/${id}`);
+      const comments = await res.json();
+      dispatch(receiveUserComments(comments));
     } catch(err) {
       const resBody = await err.json();
       if (resBody.statusCode === 400) {
@@ -92,14 +91,14 @@ export const fetchTweets = () => async dispatch => {
     }
   };
   
-  export const composeTweet = data => async dispatch => {
+  export const composeComment = data => async dispatch => {
     try {
-      const res = await jwtFetch('/api/tweets/', {
+      const res = await jwtFetch('/api/comments/', {
         method: 'POST',
         body: JSON.stringify(data)
       });
-      const tweet = await res.json();
-      dispatch(receiveTweet(tweet));
+      const comment = await res.json();
+      dispatch(receiveComment(comment));
     } catch(err) {
       const resBody = await err.json();
       if (resBody.statusCode === 400) {
@@ -108,75 +107,57 @@ export const fetchTweets = () => async dispatch => {
     }
   };
 
-  export const patchTweet = (tweet) => async dispatch => {
-    const res = await jwtFetch((`/api/tweets/${tweet._id}`), {
+  export const patchComment = (comment) => async dispatch => {
+    const res = await jwtFetch((`/api/comments/${comment._id}`), {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(tweet)
+      body: JSON.stringify(comment)
     })
 
     if (res.ok) {
-      const tweet = await res.json()
-      dispatch(updateTweet(tweet))
+      const comment = await res.json()
+      dispatch(updateComment(comment))
     }
   }
 
-export const deleteTweet = (tweetId) => async dispatch => {
-  const res = await jwtFetch((`/api/tweets/${tweetId}`), {
+export const deleteComment = (commentId) => async dispatch => {
+  const res = await jwtFetch((`/api/comments/${commentId}`), {
     method: "DELETE"
   })
 
   if (res.ok) {
-    dispatch(removeTweet(tweetId))
+    dispatch(removeComment(commentId))
   }
 }
 
 
 const nullErrors = null;
 
-export const tweetErrorsReducer = (state = nullErrors, action) => {
+export const commentErrorsReducer = (state = nullErrors, action) => {
   switch(action.type) {
-    case RECEIVE_TWEET_ERRORS:
+    case RECEIVE_COMMENT_ERRORS:
       return action.errors;
-    case CLEAR_TWEET_ERRORS:
+    case CLEAR_COMMENT_ERRORS:
       return nullErrors;
     default:
       return state;
   }
 };
 
-
-// const tweetsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
-//     switch(action.type) {
-//       case RECEIVE_TWEETS:
-//         return { ...state, all: action.tweets, new: undefined};
-//       case RECEIVE_USER_TWEETS:
-//         return { ...state, user: action.tweets, new: undefined};
-//       case RECEIVE_NEW_TWEET:
-//         return { ...state, new: action.tweet};
-//       case RECEIVE_TWEET:
-//         return { ...state, all: {...state.all, [action.tweet._id]: action.tweet}, new: undefined}
-//       case RECEIVE_USER_LOGOUT:
-//         return { ...state, user: {}, new: undefined }
-//       default:
-//         return state;
-//     }
-//   };
-
-const tweetsReducer = (state = {}, action) => {
+const commentsReducer = (state = {}, action) => {
   const newState = {...state};
 
   switch(action.type){
-      case RECEIVE_TWEETS:
-          return {...newState, ...action.tweets};
-      case RECEIVE_TWEET:
-          return {[action.tweet._id]: action.tweet, ...newState};      
-      case UPDATE_TWEET:
-          return    {...newState, [action.tweet._id]: action.tweet};
-      case REMOVE_TWEET:
-        delete newState[action.tweetId]
+      case RECEIVE_COMMENTS:
+          return {...newState, ...action.comments};
+      case RECEIVE_COMMENT:
+          return {[action.comment._id]: action.comment, ...newState};      
+      case UPDATE_COMMENT:
+          return    {...newState, [action.comment._id]: action.comment};
+      case REMOVE_COMMENT:
+        delete newState[action.commentId]
         return newState
       default:
           return state;
@@ -184,4 +165,4 @@ const tweetsReducer = (state = {}, action) => {
 }
 
   
-  export default tweetsReducer;
+  export default commentsReducer;
