@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComment } from "../../store/comments";
 
-function CommentBox ({ comment: { _id, text, author }}) {
+function CommentBox ({ comment: { _id, text, author, date, image, likes }}) {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
 
@@ -16,7 +16,10 @@ function CommentBox ({ comment: { _id, text, author }}) {
   return (
     <div className="tweet">
       <h3>{author}</h3>
+      <p>{date}</p>
       <p>{text}</p>
+      <p>Likes: {likes}</p>
+      <img src={image}></img>
       {/* {currentUser?._id == author?._id && (
         <> */}
           <EditCommentModal commentId={_id}/>
