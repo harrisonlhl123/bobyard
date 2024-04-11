@@ -1,28 +1,28 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserTweets, clearTweetErrors, getUserTweets } from '../../store/tweets';
-import TweetBox from '../Tweets/TweetBox';
+import { fetchUserComments, clearCommentErrors, getUserComments } from '../../store/comments';
+import CommentBox from '../Comments/CommentBox';
 
 function Profile () {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
-  const userTweets = useSelector(getUserTweets(currentUser._id))
+  const userComments = useSelector(getUserComments(currentUser._id))
   
   useEffect(() => {
-    dispatch(fetchUserTweets(currentUser._id));
-    return () => dispatch(clearTweetErrors());
+    dispatch(fetchUserComments(currentUser._id));
+    return () => dispatch(clearCommentErrors());
   }, [currentUser, dispatch]);
 
-  if (userTweets.length === 0) {
-    return <div>{currentUser.username} has no Tweets</div>;
+  if (userComments.length === 0) {
+    return <div>{currentUser.username} has no Comments</div>;
   } else {
     return (
       <>
-        <h2>All of {currentUser.username}'s Tweets</h2>
-        {userTweets.map(tweet => (
-          <TweetBox
-            key={tweet._id}
-            tweet={tweet}
+        <h2>All of {currentUser.username}'s Comments</h2>
+        {userComments.map(comment => (
+          <CommentBox
+            key={comment._id}
+            comment={comment}
           />
         ))}
       </>

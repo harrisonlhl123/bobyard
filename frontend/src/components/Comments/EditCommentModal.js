@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import EditTweet from './EditTweet';
+import EditComment from './EditComment';
 import { Modal } from '../Modal/Modal';
 
-function EditTweetModal({tweetId}) {
+function EditCommentModal({commentId}) {
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -10,11 +10,11 @@ function EditTweetModal({tweetId}) {
             <button onClick={() => {setShowModal(true)}}>Edit</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <EditTweet tweetId={tweetId} setShowModal={setShowModal} />
+                    <EditComment commentId={commentId} setShowModal={setShowModal} />
                 </Modal>
             )}
         </>
     )
 }
 
-export default EditTweetModal
+export default EditCommentModal

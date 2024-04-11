@@ -1,15 +1,15 @@
-import './EditTweet.css'
+import './EditComment.css'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTweet, getTweet, patchTweet } from '../../store/tweets'
+import { fetchComment, getComment, patchComment } from '../../store/comments'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
-const EditTweet = ({tweetId, setShowModal}) => {
+const EditComment = ({commentId, setShowModal}) => {
 
     const dispatch = useDispatch();
-    const tweet = useSelector(getTweet(tweetId));
-    const [text, setText] = useState(tweet.text);
+    const comment = useSelector(getComment(commentId));
+    const [text, setText] = useState(comment.text);
     const history = useHistory();
 
 
@@ -19,17 +19,17 @@ const EditTweet = ({tweetId, setShowModal}) => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        dispatch(patchTweet({_id: tweetId, text})).then(() => setShowModal(false));
+        dispatch(patchComment({_id: commentId, text})).then(() => setShowModal(false));
     }
       
     return(
         <>
             <form onSubmit={handleSubmit}>
                 <textarea onChange={changeBody} value={text}></textarea>
-                <input type="submit" value="Update Tweet"></input>
+                <input type="submit" value="Update Comment"></input>
             </form>
         </>
     )
 }
 
-export default EditTweet;
+export default EditComment;

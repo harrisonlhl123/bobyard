@@ -8,9 +8,9 @@ import NavBar from './components/NavBar/NavBar';
 import MainPage from './components/MainPage/MainPage';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
-import Tweets from './components/Tweets/Tweets';
+import Comments from './components/Comments/Comments';
 import Profile from './components/Profile/Profile';
-import TweetCompose from './components/Tweets/TweetCompose';
+import CommentCompose from './components/Comments/CommentCompose';
 
 import { getCurrentUser } from './store/session';
 
@@ -29,9 +29,9 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
 
-        <ProtectedRoute exact path="/tweets" component={Tweets} />
+        <ProtectedRoute exact path="/tweets" component={Comments} />
         <ProtectedRoute exact path="/profile" component={Profile} />
-        <ProtectedRoute exact path="/tweets/new" component={TweetCompose} />
+        <ProtectedRoute exact path="/tweets/new" component={CommentCompose} />
       </Switch>
     </>
   );

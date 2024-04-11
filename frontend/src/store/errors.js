@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { sessionErrorsReducer } from './session';
-import { tweetErrorsReducer } from './tweets';
+import { commentErrorsReducer } from './comments';
 
 export default combineReducers({
   session: sessionErrorsReducer,
-  tweet: tweetErrorsReducer
+  comment: commentErrorsReducer
 });

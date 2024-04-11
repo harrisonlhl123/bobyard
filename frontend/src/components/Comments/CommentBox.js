@@ -1,17 +1,18 @@
-import "./TweetBox.css"
-import EditTweetModal from "./EditTweetModal";
+import "./CommentBox.css"
+import EditCommentModal from "./EditCommentModal";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTweet } from "../../store/tweets";
+import { deleteComment } from "../../store/comments";
 
-function TweetBox ({ tweet: { _id, text, author }}) {
+function CommentBox ({ comment: { _id, text, author }}) {
+  // username
   const { username } = author;
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
 
   const handleDelete = (e) => {
     e.preventDefault();
-    dispatch(deleteTweet(_id));
+    dispatch(deleteComment(_id));
   }
 
   return (
@@ -20,7 +21,7 @@ function TweetBox ({ tweet: { _id, text, author }}) {
       <p>{text}</p>
       {currentUser._id == author._id && (
         <>
-          <EditTweetModal tweetId={_id}/>
+          <EditCommentModal commentId={_id}/>
           <button onClick={handleDelete}>Delete</button>
         </>
       )}
@@ -28,5 +29,5 @@ function TweetBox ({ tweet: { _id, text, author }}) {
   );
 }
 
-export default TweetBox;
+export default CommentBox;
 

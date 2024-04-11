@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearTweetErrors, composeTweet } from '../../store/tweets';
-import TweetBox from './TweetBox';
-import './TweetCompose.css';
+import { clearCommentErrors, composeComment } from '../../store/comments';
+import CommentBox from './CommentBox';
+import './CommentCompose.css';
 
-function TweetCompose () {
+function CommentCompose () {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const author = useSelector(state => state.session.user);
-  const newTweet = useSelector(state => state.tweets.new);
-  const errors = useSelector(state => state.errors.tweets);
+  const newComment = useSelector(state => state.comments.new);
+  const errors = useSelector(state => state.errors.comments);
 
   useEffect(() => {
-    return () => dispatch(clearTweetErrors());
+    return () => dispatch(clearCommentErrors());
   }, [dispatch]);
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(composeTweet({ text })); 
+    dispatch(composeComment({ text })); 
     setText('');
   };
 
@@ -30,22 +30,22 @@ function TweetCompose () {
           type="textarea"
           value={text}
           onChange={update}
-          placeholder="Write your tweet..."
+          placeholder="Write your comment..."
           required
         />
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" />
       </form>
       <div className="tweet-preview">
-        <h3>Tweet Preview</h3>
-        {text ? <TweetBox tweet={{text, author}} /> : undefined}
+        <h3>Comment Preview</h3>
+        {text ? <CommentBox comment={{text, author}} /> : undefined}
       </div>
       <div className="previous-tweet">
-        <h3>Previous Tweet</h3>
-        {newTweet ? <TweetBox tweet={newTweet} /> : undefined}
+        <h3>Previous Comment</h3>
+        {newComment ? <CommentBox comment={newComment} /> : undefined}
       </div>
     </>
   )
 }
 
-export default TweetCompose;
+export default CommentCompose;
