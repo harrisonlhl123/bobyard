@@ -1,15 +1,23 @@
 const { check } = require("express-validator");
 const handleValidationErrors = require('./handleValidationErrors');
 
-// validateTweetInput is a combination Express middleware that uses the `check`
-// middleware to validate the keys in the body of a request to create/edit
-// a tweet
-const validateTweetInput = [
+const validateCommentInput = [
+  check('author')
+    .exists({ checkFalsy: true })
+    .withMessage("Author can't be blank"),
   check('text')
     .exists({ checkFalsy: true })
-    // .isLength({ min: 5, max: 140 })
     .withMessage("Tweet can't be blank"),
+  check('date')
+    .exists({ checkFalsy: true })
+    .withMessage("Date can't be blank"),
+  check('likes')
+    .exists({ checkFalsy: true })
+    .withMessage("Likes can't be blank"),
+  check('image')
+    .exists({ checkFalsy: true })
+    .withMessage("Image can't be blank"),
   handleValidationErrors
 ];
 
-module.exports = validateTweetInput;
+module.exports = validateCommentInput;
