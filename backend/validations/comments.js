@@ -8,15 +8,15 @@ const validateCommentInput = [
   check('text')
     .exists({ checkFalsy: true })
     .withMessage("Tweet can't be blank"),
-  check('date')
-    .exists({ checkFalsy: true })
-    .withMessage("Date can't be blank"),
-  check('likes')
-    .exists({ checkFalsy: true })
-    .withMessage("Likes can't be blank"),
-  check('image')
-    .exists({ checkFalsy: true })
-    .withMessage("Image can't be blank"),
+  // check('date')
+  //   .exists({ checkFalsy: true })
+  //   .withMessage("Date can't be blank"),
+  // check('likes')
+  //   .exists({ checkFalsy: true })
+  //   .withMessage("Likes can't be blank"),
+  // check('image')
+  //   .exists({ checkFalsy: true })
+  //   .withMessage("Image can't be blank"),
   handleValidationErrors
 ];
 
