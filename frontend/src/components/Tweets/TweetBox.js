@@ -3,8 +3,6 @@ import EditTweetModal from "./EditTweetModal";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTweet } from "../../store/tweets";
-import MakeComment from "../Comments/MakeComment";
-import AllComments from "../Comments/AllComments";
 
 function TweetBox ({ tweet: { _id, text, author }}) {
   const { username } = author;
@@ -26,10 +24,6 @@ function TweetBox ({ tweet: { _id, text, author }}) {
           <button onClick={handleDelete}>Delete</button>
         </>
       )}
-
-      <AllComments tweetId={_id} />
-
-      <MakeComment tweetId={_id}/>
     </div>
   );
 }
