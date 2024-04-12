@@ -11,7 +11,6 @@ function CommentCompose ({setShowModal}) {
   const author = author_id.username;
   const newComment = useSelector(state => state.comments.new);
   const errors = useSelector(state => state.errors.comments);
-  // debugger
 
   useEffect(() => {
     return () => dispatch(clearCommentErrors());
@@ -38,14 +37,6 @@ function CommentCompose ({setShowModal}) {
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" />
       </form>
-      {/* <div className="tweet-preview">
-        <h3>Comment Preview</h3>
-        {text ? <CommentBox comment={{text, author}} /> : undefined}
-      </div>
-      <div className="previous-tweet">
-        <h3>Previous Comment</h3>
-        {newComment ? <CommentBox comment={newComment} /> : undefined}
-      </div> */}
     </>
   )
 }

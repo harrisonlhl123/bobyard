@@ -9,8 +9,6 @@ import MainPage from './components/MainPage/MainPage';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import Comments from './components/Comments/Comments';
-import Profile from './components/Profile/Profile';
-import CommentCompose from './components/Comments/CommentCompose';
 
 import { getCurrentUser } from './store/session';
 

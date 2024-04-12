@@ -2,7 +2,6 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_COMMENTS = "comments/RECEIVE_COMMENTS";
-const RECEIVE_USER_COMMENTS = "comments/RECEIVE_USER_COMMENTS";
 const RECEIVE_COMMENT = "comments/RECEIVE_COMMENT"
 const RECEIVE_COMMENT_ERRORS = "comments/RECEIVE_COMMENT_ERRORS";
 const CLEAR_COMMENT_ERRORS = "comments/CLEAR_COMMENT_ERRORS";
@@ -11,11 +10,6 @@ const REMOVE_COMMENT = "comments/REMOVE_COMMENT";
 
 const receiveComments = comments => ({
   type: RECEIVE_COMMENTS,
-  comments
-});
-
-const receiveUserComments = comments => ({
-  type: RECEIVE_USER_COMMENTS,
   comments
 });
 
@@ -45,16 +39,12 @@ export const clearCommentErrors = errors => ({
 });
 
 export const getComment = commentId => state => {
-  // Assuming commentId is a string
   const commentArray = Object.values(state.comments) || [];
   const comment = commentArray.find(c => c._id === commentId);
   return comment || null;
 };
 
 export const getComments = state => state.comments ? state.comments : [];
-
-export const getUserComments = userId => state => Object.values(state.comments)
-    .filter(comment => comment.author._id == userId)
 
 export const fetchComments = () => async dispatch => {
     try {
@@ -77,19 +67,6 @@ export const fetchComments = () => async dispatch => {
       dispatch(receiveComment(comment));
     }
   }
-  
-  export const fetchUserComments = id => async dispatch => {
-    try {
-      const res = await jwtFetch(`/api/comments/user/${id}`);
-      const comments = await res.json();
-      dispatch(receiveUserComments(comments));
-    } catch(err) {
-      const resBody = await err.json();
-      if (resBody.statusCode === 400) {
-        return dispatch(receiveErrors(resBody.errors));
-      }
-    }
-  };
   
   export const composeComment = data => async dispatch => {
     try {

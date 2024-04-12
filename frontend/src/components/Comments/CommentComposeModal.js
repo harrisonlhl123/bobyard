@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import EditComment from './EditComment';
 import { Modal } from '../Modal/Modal';
 import CommentCompose from './CommentCompose';
 
