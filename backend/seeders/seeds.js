@@ -148,7 +148,7 @@ const comments = [
 
 // Connect to the database and insert your seeds
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users and tweets...");
+  console.log("Resetting db and seeding users and comments...");
 
   User.collection.drop()
     .then(() => Comment.collection.drop())

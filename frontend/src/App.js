@@ -27,7 +27,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
 
-        <ProtectedRoute exact path="/tweets" component={Comments} />
+        <ProtectedRoute exact path="/comments" component={Comments} />
       </Switch>
     </>
   );
