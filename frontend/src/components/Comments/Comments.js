@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCommentErrors, fetchComments } from '../../store/comments';
 import CommentBox from './CommentBox';
+import CommentComposeModal from './CommentComposeModal';
 
 function Comments () {
   const dispatch = useDispatch();
@@ -16,7 +17,8 @@ function Comments () {
 
   return (
     <>
-      <h2>All Comments</h2>
+      <h2>Which technologies do you prefer to use?</h2>
+      <CommentComposeModal />
       {comments.map(comment => (
         <CommentBox key={comment._id} comment={comment} />
       ))}

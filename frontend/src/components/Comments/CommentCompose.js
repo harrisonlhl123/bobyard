@@ -4,7 +4,7 @@ import { clearCommentErrors, composeComment } from '../../store/comments';
 import CommentBox from './CommentBox';
 import './CommentCompose.css';
 
-function CommentCompose () {
+function CommentCompose ({setShowModal}) {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const author_id = useSelector(state => state.session.user);
@@ -19,7 +19,7 @@ function CommentCompose () {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(composeComment({ text, author })); 
+    dispatch(composeComment({ text, author })).then(() => setShowModal(false)); 
     setText('');
   };
 
