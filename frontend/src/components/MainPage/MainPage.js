@@ -1,12 +1,14 @@
+import './MainPage.css';
+
 function MainPage() {
-    return (
-      <>
-        <p>A Twitter Clone</p>
-        <footer>
-          Copyright &copy; 2022 Chirper
-        </footer>
-      </>
-    );
-  }
-  
-  export default MainPage;
+  return (
+    <div className="main-page">
+      <h1 className="welcome-text">Welcome to Bobyard</h1>
+      <footer className="footer">
+        Copyright &copy; 2024 Bobyard
+      </footer>
+    </div>
+  );
+}
+
+export default MainPage;

@@ -14,18 +14,23 @@ function CommentBox ({ comment: { _id, text, author, date, image, likes }}) {
   }
 
   return (
-    <div className="tweet">
-      <h3>{author}</h3>
-      <p>{date}</p>
-      <p>{text}</p>
-      <p>Likes: {likes}</p>
-      <img src={image}></img>
-      {currentUser?._id == '66182fc8f225c9be4094ee26' && (
-        <>
-          <EditCommentModal commentId={_id}/>
-          <button onClick={handleDelete}>Delete</button>
-        </>
-      )}
+    <div className="comment-box">
+      <div className="comment">
+        <div className="comment-header">
+          <h3 className="author">{author}</h3>
+          <p className="date">{date}</p>
+        </div>
+        <p className="comment-text">{text}</p>
+        <p className="likes">Likes: {likes}</p>
+        {image && <img className="comment-image" src={image}></img>}
+        <br></br>
+        {currentUser?._id == '66182fc8f225c9be4094ee26' && (
+          <>
+            <EditCommentModal commentId={_id}/>
+            <button className="delete-button" onClick={handleDelete}>Delete</button>
+          </>
+        )}
+      </div>
     </div>
   );
 }

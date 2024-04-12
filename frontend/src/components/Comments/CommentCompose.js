@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCommentErrors, composeComment } from '../../store/comments';
-import CommentBox from './CommentBox';
 import './CommentCompose.css';
 
 function CommentCompose ({setShowModal}) {
@@ -26,16 +25,16 @@ function CommentCompose ({setShowModal}) {
 
   return (
     <>
-      <form className="compose-tweet" onSubmit={handleSubmit}>
-        <input 
-          type="textarea"
+      <form className="comment-compose" onSubmit={handleSubmit}>
+        <textarea 
+          className="comment-textarea"
           value={text}
           onChange={update}
           placeholder="Write your comment..."
           required
         />
         <div className="errors">{errors?.text}</div>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="submit-button" />
       </form>
     </>
   )

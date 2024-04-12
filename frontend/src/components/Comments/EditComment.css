@@ -1,0 +1,29 @@
+.edit-comment-form {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .edit-comment-textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  .edit-comment-submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-comment-submit-button:hover {
+    background-color: #0056b3;
+  }
+  

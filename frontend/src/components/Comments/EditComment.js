@@ -22,14 +22,14 @@ const EditComment = ({commentId, setShowModal}) => {
         dispatch(patchComment({_id: commentId, text})).then(() => setShowModal(false));
     }
       
-    return(
+    return (
         <>
-            <form onSubmit={handleSubmit}>
-                <textarea onChange={changeBody} value={text}></textarea>
-                <input type="submit" value="Update Comment"></input>
+            <form className="edit-comment-form" onSubmit={handleSubmit}>
+                <textarea className="edit-comment-textarea" onChange={changeBody} value={text}></textarea>
+                <input type="submit" value="Update Comment" className="edit-comment-submit-button"></input>
             </form>
         </>
-    )
+    );
 }
 
 export default EditComment;

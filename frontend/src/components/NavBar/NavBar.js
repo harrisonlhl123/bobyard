@@ -8,8 +8,8 @@ function NavBar () {
   const dispatch = useDispatch();
   
   const logoutUser = e => {
-      e.preventDefault();
-      dispatch(logout());
+    e.preventDefault();
+    dispatch(logout());
   }
 
   const handleAdminLogin = (e) => {
@@ -17,29 +17,21 @@ function NavBar () {
     dispatch(login({ email: "admin@aa.io", password: "password" })); 
   }
 
-  const getLinks = () => {
-    if (loggedIn) {
-      return (
-        <div className="links-nav">
-          <button onClick={logoutUser}>Logout</button>
-        </div>
-      );
-    } else {
-      return (
-        <div className="links-auth">
-          <Link to={'/signup'}>Signup</Link>
-          <Link to={'/login'}>Login</Link>
-          <button onClick={handleAdminLogin}>Admin Login</button>
-        </div>
-      );
-    }
-  }
-
   return (
-    <>
-      <h1>Chirper</h1>
-      { getLinks() }
-    </>
+    <nav className="navbar">
+      <Link className="navbar-link" to={'/'}>Bobyard</Link>
+      <div className="navbar-links">
+        {loggedIn ? (
+          <button className="navbar-button" onClick={logoutUser}>Logout</button>
+        ) : (
+          <>
+            <Link className="navbar-link" to={'/signup'}>Signup</Link>
+            <Link className="navbar-link" to={'/login'}>Login</Link>
+            <button className="navbar-button" onClick={handleAdminLogin}>Admin Login</button>
+          </>
+        )}
+      </div>
+    </nav>
   );
 }
 
