@@ -2,12 +2,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCommentErrors, fetchComments } from '../../store/comments';
 import CommentBox from './CommentBox';
-import CommentComposeModal from './CommentComposeModal';
 
-function Comments () {
+function Replies ({parentId}) {
   const dispatch = useDispatch();
   const comments = useSelector(state => Object.values(state.comments));
-  const parentComments = comments.filter((comment) => comment.parent == '');
+  const replyComments = comments.filter((comment) => comment.parent == parentId);
   
   useEffect(() => {
     dispatch(fetchComments());
@@ -18,13 +17,11 @@ function Comments () {
 
   return (
     <>
-      <h2>Which technologies do you prefer to use?</h2>
-      <CommentComposeModal />
-      {parentComments.map(parentComment => (
-        <CommentBox key={parentComment._id} comment={parentComment} />
+      {replyComments.map(replyComment => (
+        <CommentBox key={replyComment._id} comment={replyComment} />
       ))}
     </>
   );
 }
 
-export default Comments;
+export default Replies;

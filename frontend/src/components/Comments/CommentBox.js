@@ -3,8 +3,9 @@ import EditCommentModal from "./EditCommentModal";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComment } from "../../store/comments";
+import Replies from "./Replies";
 
-function CommentBox ({ comment: { _id, text, author, date, image, likes }}) {
+function CommentBox ({ comment: { _id, text, author, date, image, likes, id }}) {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
 
@@ -30,6 +31,8 @@ function CommentBox ({ comment: { _id, text, author, date, image, likes }}) {
             <button className="delete-button" onClick={handleDelete}>Delete</button>
           </>
         )}
+        
+        <Replies parentId={id}/>
       </div>
     </div>
   );
