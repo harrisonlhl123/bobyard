@@ -48,6 +48,7 @@ router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
       const newComment = new Comment({
         text: req.body.text,
         author: req.body.author,
+        parent: req.body.parent,
         date
       });
   

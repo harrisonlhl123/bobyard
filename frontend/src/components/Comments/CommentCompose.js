@@ -17,7 +17,7 @@ function CommentCompose ({setShowModal}) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(composeComment({ text, author })).then(() => setShowModal(false)); 
+    dispatch(composeComment({ text, author, parent: '' })).then(() => setShowModal(false)); 
     setText('');
   };
 

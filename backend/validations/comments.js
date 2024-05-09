@@ -2,9 +2,9 @@ const { check } = require("express-validator");
 const handleValidationErrors = require('./handleValidationErrors');
 
 const validateCommentInput = [
-  check('id')
-    .exists({ checkFalsy: true })
-    .withMessage("id can't be blank"),
+  // check('id')
+  //   .exists({ checkFalsy: true })
+  //   .withMessage("id can't be blank"),
   // check('parent')
   //   .exists({ checkFalsy: true })
   //   .withMessage("Parent can't be blank"),
